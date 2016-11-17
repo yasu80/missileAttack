@@ -21,33 +21,18 @@ int memo_loopCount;
 
 float targetX, targetY;
 
-class Missile_op {
-  float xMis, yMis, xSpeed, ySpeed,
-  RKT_SIZE = 40;  
-  Missile_op (float _x, float _y, float _ySpeed) {
-    xMis = _x;
-    yMis = _y;
-    ySpeed = _ySpeed;
+//CallBacks Start
+void mousePressed() {
+  if(breakFlag == false){
+    missileFlag = true;
   }
- 
-  void update() {
-    yMis += ySpeed;
-
-    if (yMis > height) {
-      yMis = 0;
-    }
-  }
- 
-  void display(){
-    noStroke();
-    fill(#FFFFFF);
-    rect(xMis,yMis,RKT_SIZE,5*RKT_SIZE);
-    triangle(xMis+RKT_SIZE/2,yMis+RKT_SIZE*3.5,xMis+RKT_SIZE*3/2,yMis+RKT_SIZE*5,xMis-RKT_SIZE/2,yMis+RKT_SIZE*5);
-    triangle(xMis+RKT_SIZE/2,yMis-RKT_SIZE/4,xMis-RKT_SIZE*3/4,yMis+RKT_SIZE/2,xMis+RKT_SIZE*7/4,yMis+RKT_SIZE/2);
-    ellipse(xMis+RKT_SIZE/2,yMis,RKT_SIZE,RKT_SIZE);
-  }  
 }
+void mouseReleased() {
+  breakFlag = true;
+}
+//CallBacks Over
 
+//Controller Start
 void command_enemy(){
   int i,
   j = 0;
@@ -65,7 +50,6 @@ void command_enemy(){
      text("You_survived_with\n"+Integer.toString(memo_bullet)+"_Shot\n" +Integer.toString(enemyaero.length) + "_Kill\n" + Integer.toString(memo_loopCount*100) + "_Casuality",100,100);
    }  
 }
-
 void command_myMis(){
   if (missileFlag) {
     if (!breakFlag) {
@@ -82,23 +66,36 @@ void command_myMis(){
   } else {
     init_missile();
   } 
-}   
-  
+}
+//Controller Over
 
-void mousePressed() {
-  if(breakFlag == false)missileFlag = true;
+//Judger Start
+boolean judgeHit(float bx, float by, float tgtX, float tgtY) {
+  if (breakFlag = true) {
+    if ((bombCount + bombCount) > ( dist(bx,by,tgtX,tgtY) ) )  {
+      return true;
+    } else return false;
+  } else return false;
 }
-void mouseReleased() {
-  breakFlag = true;
+void ifTerm(){
+  if (endFlag == true){
+  drawBG();
+  text("You_survived_with\n"+Integer.toString(memo_bullet)+"_Shot\n" +Integer.toString(enemyaero.length) + "_Kill\n" + Integer.toString(memo_loopCount*100) + "_Casuality\n__GAME_OVER__",100,100);
+  
+  println("You_survived_with\n"+Integer.toString(memo_bullet)+"_Shot\n" +Integer.toString(enemyaero.length) + "_Kill\n" + Integer.toString(memo_loopCount*100) + "_Casuality");
+  println("GAME OVER");
+  noLoop();
+  }
 }
-//Anime
+//Judger Over  
+
+//Animetor Start
 void drawBG() {
   noStroke();
   float shoreSide =  width/8;
   float citySide = width*6/8;
   float zero_alt = height -  height/20;
   float building = 200;
-
   //buiding
   for (int i = 0; i < 4; i++) {
     fill(#B4AE9B);
@@ -112,28 +109,12 @@ void drawBG() {
   triangle(0, height, shoreSide, zero_alt, shoreSide, height);
   rect(shoreSide, zero_alt, width - shoreSide, height - zero_alt);
 }
-
-
-boolean judgeHit(float bx, float by, float tgtX, float tgtY) {
-  if (breakFlag = true) {
-    if ((bombCount + bombCount) > ( dist(bx,by,tgtX,tgtY) ) )  {
-      return true;
-    } else return false;
-  } else return false;
-}
-
-void setTarget() {
-  for(int i = 0; i < enemyaero.length; i ++){
-    enemyaero[i] = new EnemyAero(random(10,width),random(30,height-100));
-    }      
-}
-
 void drawTruck(float arpha, float beta) {
   float center = arpha + 10;
-  float ROCKET_SIZE = 10;
+  float truck_SIZE = 10;
   float car = 20;
   //    float len_msl = 50;
-  float len_msl = ROCKET_SIZE*5;
+  float len_msl = truck_SIZE*5;
   //truck
   stroke(5);
   fill(#584BF7);
@@ -147,19 +128,22 @@ void drawTruck(float arpha, float beta) {
   noStroke();
   fill(#000000);
   for (int i = 0; i < 3; i ++){ 
-    rect(arpha,beta - len_msl,ROCKET_SIZE,5*ROCKET_SIZE);
-    triangle(arpha+ROCKET_SIZE/2,beta - len_msl+ROCKET_SIZE*3.5,arpha+ROCKET_SIZE*3/2,beta - len_msl+ROCKET_SIZE*5,arpha-ROCKET_SIZE/2,beta - len_msl+ROCKET_SIZE*5);
-    triangle(arpha+ROCKET_SIZE/2,beta - len_msl-ROCKET_SIZE/4,arpha-ROCKET_SIZE*3/4,beta - len_msl+ROCKET_SIZE/2,arpha+ROCKET_SIZE*7/4,beta - len_msl+ROCKET_SIZE/2);
-    ellipse(arpha+ROCKET_SIZE/2,beta - len_msl,ROCKET_SIZE,ROCKET_SIZE);
+    rect(arpha,beta - len_msl,truck_SIZE,5*truck_SIZE);
+    triangle(arpha+truck_SIZE/2,beta - len_msl+truck_SIZE*3.5,arpha+truck_SIZE*3/2,beta - len_msl+truck_SIZE*5,arpha-truck_SIZE/2,beta - len_msl+truck_SIZE*5);
+    triangle(arpha+truck_SIZE/2,beta - len_msl-truck_SIZE/4,arpha-truck_SIZE*3/4,beta - len_msl+truck_SIZE/2,arpha+truck_SIZE*7/4,beta - len_msl+truck_SIZE/2);
+    ellipse(arpha+truck_SIZE/2,beta - len_msl,truck_SIZE,truck_SIZE);
     arpha = arpha + 20;
   }
 }
-
 void drawTarget() {
   fill(#000000);
   rect(targetX-15, targetY-15, 30, 30);
+} 
+void setTarget() {
+  for(int i = 0; i < enemyaero.length; i ++){
+    enemyaero[i] = new EnemyAero(random(10,width),random(30,height-100));
+    }      
 }
-
 void bomb() {
   float bombX = pointX;
   float bombY = pointY;
@@ -184,6 +168,7 @@ void message() {
   }
 }
 
+//Title Start
 void effect_title(){
   for(int i = 0; i < 10; i++){
     fill(#FF1212);
@@ -191,7 +176,30 @@ void effect_title(){
     fill(#000000);
   }
 }
+class Missile_op {
+  float xMis, yMis, xSpeed, ySpeed,
+  RKT_SIZE = 40;  
+  Missile_op (float _x, float _y, float _ySpeed) {
+    xMis = _x;
+    yMis = _y;
+    ySpeed = _ySpeed;
+  }
+  void update() {
+    yMis += ySpeed;
 
+    if (yMis > height) {
+      yMis = 0;
+    }
+  }
+  void display(){
+    noStroke();
+    fill(#FFFFFF);
+    rect(xMis,yMis,RKT_SIZE,5*RKT_SIZE);
+    triangle(xMis+RKT_SIZE/2,yMis+RKT_SIZE*3.5,xMis+RKT_SIZE*3/2,yMis+RKT_SIZE*5,xMis-RKT_SIZE/2,yMis+RKT_SIZE*5);
+    triangle(xMis+RKT_SIZE/2,yMis-RKT_SIZE/4,xMis-RKT_SIZE*3/4,yMis+RKT_SIZE/2,xMis+RKT_SIZE*7/4,yMis+RKT_SIZE/2);
+    ellipse(xMis+RKT_SIZE/2,yMis,RKT_SIZE,RKT_SIZE);
+  }  
+}
 void drawTitle(){
   int i;
 //  int word = 4;
@@ -217,6 +225,26 @@ void drawTitle(){
   }
 }
 
+void processTitleState(){
+  if (1 == phase_title) {
+    titleFlag = false;
+    println("Incoming " + Integer.toString(enemyaero.length) + " Attackers!!"); 
+  }
+  
+  phase_title = 1;
+  Title = 400;
+  background(#FF1212);
+  delay(300);//Hey!
+}
+void setOpMissiles(){
+  for(int i = 0; i < missile_op.length; i ++){
+    missile_op[i] = new Missile_op(random(width), height,  random(-8.0, -2.0));
+    }    
+}
+//Title Over
+
+
+//Updators Start 
 void drawEnemyAero(float pX, float pY,float size){
   float arpha = size;
   float beta = size/4;
@@ -268,13 +296,7 @@ void init_missile() {
   bombCount = 0;
   breakFlag = false;
 }
-
-void setTitle(){
-  for(int i = 0; i < missile_op.length; i ++){
-    missile_op[i] = new Missile_op(random(width), height,  random(-8.0, -2.0));
-    }    
-}
-
+//Updators Start
 class Missile {
   float xMis, yMis, xSpeed, ySpeed; 
    float RKT_SIZE = 50;
@@ -283,10 +305,8 @@ class Missile {
     yMis = _y;
     ySpeed = _ySpeed;
   }
- 
   void update() {
     yMis += ySpeed;
-
     if (yMis > height) {
       yMis = 0;
     }
@@ -300,7 +320,6 @@ class Missile {
     ellipse(xMis+RKT_SIZE/2,yMis,RKT_SIZE,RKT_SIZE);
   }  
 }
-
 class EnemyAero {
  float x, y;
  float size = 50;
@@ -327,7 +346,6 @@ class EnemyAero {
   else return false;
  }
 }
-
 class EnemyMis {
  float x, y;
  float size = 50;
@@ -349,12 +367,11 @@ class EnemyMis {
   triangle(x + arpha/2, y - beta/2, x + arpha, y - beta/2 ,x + arpha , y - beta - beta);
  }
 }
-
-//Anime_EndEN
+//Animetors Over
 
 //Val
-  int phase_title = 0;
-float point_zero ;
+int phase_title = 0;
+float point_zero;
 float spd = 0;  
 float turn = 0;
 float pointX;
@@ -366,18 +383,14 @@ void setup() {
   textSize(16);
   size (600, 600);
   setTarget();
-  setTitle();
+  setOpMissiles();
 }
 
 void draw() {
   if (titleFlag == true){
     drawTitle();
     if (keyPressed){
-      if (1 == phase_title) titleFlag = false;
-      phase_title = 1;
-      Title = 400;
-      background(#FF1212);
-      delay(300);//Hey!
+    processTitleState();
     }
     if(Title < 400)Title++;
     if (Title >= 400) phase_title = 1;
@@ -385,6 +398,7 @@ void draw() {
   else {
     background(#FFFFFF);
     loopCount++;
+    ifTerm();
     command_enemy();
     command_myMis();
     drawEnemyAero(targetX,targetY,30);

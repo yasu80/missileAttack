@@ -1,6 +1,6 @@
 //**************************The_Source_was_written_by_Tokuyasu_Hajime**************************
 //**************************__________Source_Built:20160613__________**************************
-
+//TODO.get fps
 //obj
 Missile_op[] missile_op = new Missile_op[40];
 EnemyAero[] enemyaero = new EnemyAero[30];  
@@ -69,8 +69,10 @@ void command_myMis(){
 }
 
 void mainLoop(){
+    noCursor();
     background(#FFFFFF);
     loopCount++;
+    sight();
     ifTerm();
     command_enemy();
     command_myMis();
@@ -102,6 +104,19 @@ void ifTerm(){
 //Judger Over  
 
 //Animetor Start
+void sight(){
+  fill(#FFFFFF);
+  stroke(5);
+  float x = mouseX;
+  float y = mouseY;
+  float reticle = 40;
+  ellipse(x,y,reticle,reticle);
+  rect(x-reticle/4,y-reticle/4,reticle/2,reticle/2);
+  line(x-reticle/3,y,x+reticle/3,y);
+  line(x,y-reticle/3,x,y+reticle/3);
+  //line();
+}
+
 void drawBG() {
   noStroke();
   float shoreSide =  width/8;
@@ -414,7 +429,6 @@ void draw() {
     if (Title >= 400 && phase_title == 0) phase_title = 1;
   }
   else {
-    //TODO.clean there
     mainLoop();
   }
 }

@@ -1,10 +1,14 @@
 # missileAttack
 80年代の戦略スクロールシューターに憧れていた夢の跡. ※スパゲティ注意
 
+
 ![BATTLE](https://github.com/yasu80/missileAttack/blob/master/readme/BATTLE.jpg)
 
 ## 概要
 シューティングゲーム. 難易度は低め.
+
+##動作環境
+Ubuntu 16.04 64bit LTS 上 及び Windows 8.1 上の Processing 3 系
 
 ## 操作方法
 クリックで射撃, 暗い画像で弾道は見えないので, レーダの表示をもとにミサイルの座標を見て, タイミングよく爆破. 敵を落とす.

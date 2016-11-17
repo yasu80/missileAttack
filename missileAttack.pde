@@ -1,4 +1,4 @@
-      //**************************The_Source_was_written_by_Tokuyasu_Hajime**************************
+//**************************The_Source_was_written_by_Tokuyasu_Hajime**************************
 //**************************__________Source_Built:20160613__________**************************
 
 //obj
@@ -91,19 +91,7 @@ void mousePressed() {
 void mouseReleased() {
   breakFlag = true;
 }
-/*
-void keyPressed(){
-   if (keyCode == 32) {
-     missileFlag = true;
-   }
-}
-
-void keyReleased(){
-   if (keyCode == 32) breakFlag = true;
-}
-*/
 //Anime
-
 void drawBG() {
   noStroke();
   float shoreSide =  width/8;
@@ -120,7 +108,6 @@ void drawBG() {
     citySide += building /2;
   }
   //land
-
   fill(#FCBB05);  
   triangle(0, height, shoreSide, zero_alt, shoreSide, height);
   rect(shoreSide, zero_alt, width - shoreSide, height - zero_alt);
@@ -136,8 +123,6 @@ boolean judgeHit(float bx, float by, float tgtX, float tgtY) {
 }
 
 void setTarget() {
-  //targetX = random(10, width - 10);
-  //targetY = random(10, 20);
   for(int i = 0; i < enemyaero.length; i ++){
     enemyaero[i] = new EnemyAero(random(10,width),random(30,height-100));
     }      
@@ -157,9 +142,6 @@ void drawTruck(float arpha, float beta) {
   float offset = 20;
   ellipse(arpha +offset, beta + offset, radius, radius );
   ellipse(arpha + 3* offset , beta + offset, radius, radius );
-   
-  //rect (arpha + car * 4, beta - car, car, car*2);
-  //rect (arpha + car * 3, beta - car -car, car, car*2);
   rect (arpha + car/2, beta - car, car*3 , car);
   //missile
   noStroke();
@@ -188,8 +170,6 @@ void bomb() {
     if (true == hitFlag){
       if (enemyaero[i].downFlag == false){
       enemyaero[i].downFlag = true;
-//      textSize(16);
-//      text("EnemyNo:"+Integer.toString( i )+"Shot_down",10,40);
       println("EnemyNo:"+Integer.toString( i )+"Shot_down");
       }
     }
@@ -238,7 +218,6 @@ void drawTitle(){
 }
 
 void drawEnemyAero(float pX, float pY,float size){
-//  pX = 100;
   float arpha = size;
   float beta = size/4;
   fill(#8ECCF2);
@@ -247,7 +226,6 @@ void drawEnemyAero(float pX, float pY,float size){
   fill(#CE1313);
   ellipse(pX,pY,arpha,beta);
   rect(pX,pY - beta/2,arpha,beta);
-  //triangle(pX - beta,pX + beta/2,pX,pX,pX,pX + beta);
   triangle(pX + arpha, pY - beta/2, pX + arpha, pY + beta/2 ,pX + arpha + beta /4, pY + beta/2);
   triangle(pX,pY + beta/2, pX + arpha,pY + beta/2,pX + arpha/2 + beta,pY + beta);
   triangle(pX + arpha/2, pY - beta/2, pX + arpha, pY - beta/2 ,pX + arpha , pY - beta - beta);
@@ -406,30 +384,11 @@ void draw() {
   }
   else {
     background(#FFFFFF);
-    //   drawBG();
-    /*  
-      if (missileFlag) {
-        if (!breakFlag) {
-          update();
-          drawMissile(pointX, pointY);
-        } else {
-          if (++bombCount < 50) {
-            bomb();
-          } else {
-            missileFlag = false;
-            bullet++;
-          }
-        }
-      } else {
-        init_missile();
-      }
-    */
     loopCount++;
     command_enemy();
     command_myMis();
     drawEnemyAero(targetX,targetY,30);
     drawBG();
     drawTruck(mouseX,height-50);
-//    message();
   }
 }

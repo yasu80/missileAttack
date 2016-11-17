@@ -19,6 +19,7 @@ int Title = 4;
 int loopCount = 0;
 int memo_loopCount;
 
+PImage bgr,hoke;
 float targetX, targetY;
 
 //CallBacks Start
@@ -72,12 +73,12 @@ void mainLoop(){
     noCursor();
     background(#FFFFFF);
     loopCount++;
+    drawBG();
     sight();
     ifTerm();
     command_enemy();
     command_myMis();
     drawEnemyAero(targetX,targetY,30);
-    drawBG();
     drawTruck(mouseX,height-50);
 }
 
@@ -113,10 +114,10 @@ void sight(){
      stroke(#0DFF47);
   } else {
     stroke(#FA0303);
-    text("MSL:"+Float.toString(x)+"."+Float.toString(height - y),x+20,y-20);
+    text("MSL:"+Float.toString(pointX)+"."+Float.toString(height - pointY),x+20,y-20);
     if ( ((x - reticle) < pointX) && ( pointX <(x + reticle)) && ((y - reticle) < pointY) && ( pointY <(y + reticle)) ){//aiming
-    fill(#000000 );
-    text("VALID AIM",x-20,y-20);  
+    fill(#F8FC19 );
+    text("VALID AIM",x,y+50);  
     }
   }
   ellipse(x,y,reticle,reticle);
@@ -132,6 +133,7 @@ void sight(){
 
 void drawBG() {
   noStroke();
+  image(bgr,0,0);
   float shoreSide =  width/8;
   float citySide = width*6/8;
   float zero_alt = height -  height/20;
@@ -272,9 +274,11 @@ void processTitleState(){
   } else if (1 == phase_title) {
   phase_title = 2;
   background(#000000);
-  text("Click to Launch\nRelease to Fire.\n...Kill off Invadors!",100,200);
+  textSize(28);
+  text("Click to Launch\nRelease to Fire.\n...Kill off Invadors!",50,100);
   delay(200);
-  println("Click to Launch\nRelease to Fire.\n...Kill off Invadors!"); 
+  println("Click to Launch\nRelease to Fire.\n...Kill off Invadors!");
+  image(hoke,width/3, height/3 );
   } else {
   phase_title = 1;
   Title = 400;
@@ -425,11 +429,12 @@ float pointY;
 //Val_End
 
 void setup() {
-  
   textSize(16);
   size (1000, 700);
   setTarget();
   setOpMissiles();
+  bgr = loadImage("background.jpg");
+  hoke = loadImage("hoke.jpg");
 }
 
 void draw() {

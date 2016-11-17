@@ -3,7 +3,7 @@
 
 //obj
 Missile_op[] missile_op = new Missile_op[40];
-EnemyAero[] enemyaero = new EnemyAero[80];  
+EnemyAero[] enemyaero = new EnemyAero[30];  
 //inherit_num
 float ROCKET_SIZE = 10;
 float SPD_TERM = 30;
@@ -268,7 +268,7 @@ void drawMissile(float startX, float startY) {
 }
 
 void accelMe() {
-  spd += random(-1, 50);  
+  spd += random(2, 5);  
   pointY  -= spd;
 }
 
@@ -332,8 +332,8 @@ class EnemyAero {
   drawEnemyAero(x,y,size);   
  }
  void update(){
-   x += random(-6,-3);
-   y += random(-1,1);
+   x += random(-12,-10);
+   y += random(-2,2);
    if(y < 100 ) y = 101;
    if(y > height - 200) y = height -210;
    if(x < 0) x = width -5;
@@ -381,7 +381,7 @@ float pointY;
 void setup() {
   
   textSize(16);
-  size (600, 600);
+  size (1000, 700);
   setTarget();
   setOpMissiles();
 }

@@ -56,7 +56,7 @@ void command_myMis(){
       update();
       drawMissile(pointX, pointY);
     } else {
-      if (++bombCount < 50) {
+      if (++bombCount < 25) {
         bomb();
       } else {
         missileFlag = false;
@@ -67,6 +67,18 @@ void command_myMis(){
     init_missile();
   } 
 }
+
+void mainLoop(){
+    background(#FFFFFF);
+    loopCount++;
+    ifTerm();
+    command_enemy();
+    command_myMis();
+    drawEnemyAero(targetX,targetY,30);
+    drawBG();
+    drawTruck(mouseX,height-50);
+}
+
 //Controller Over
 
 //Judger Start
@@ -226,15 +238,21 @@ void drawTitle(){
 }
 
 void processTitleState(){
-  if (1 == phase_title) {
+  if (2 == phase_title) {
     titleFlag = false;
     println("Incoming " + Integer.toString(enemyaero.length) + " Attackers!!"); 
-  }
-  
+  } else if (1 == phase_title) {
+  phase_title = 2;
+  background(#000000);
+  text("Click to Launch\nRelease to Fire.\n...Kill off Invadors!",100,200);
+  delay(200);
+  println("Click to Launch\nRelease to Fire.\n...Kill off Invadors!"); 
+  } else {
   phase_title = 1;
   Title = 400;
   background(#FF1212);
   delay(300);//Hey!
+  }
 }
 void setOpMissiles(){
   for(int i = 0; i < missile_op.length; i ++){
@@ -268,7 +286,7 @@ void drawMissile(float startX, float startY) {
 }
 
 void accelMe() {
-  spd += random(2, 5);  
+  spd += random(1, 2);  
   pointY  -= spd;
 }
 
@@ -332,7 +350,7 @@ class EnemyAero {
   drawEnemyAero(x,y,size);   
  }
  void update(){
-   x += random(-12,-10);
+   x += random(-10,-6);
    y += random(-2,2);
    if(y < 100 ) y = 101;
    if(y > height - 200) y = height -210;
@@ -393,16 +411,10 @@ void draw() {
     processTitleState();
     }
     if(Title < 400)Title++;
-    if (Title >= 400) phase_title = 1;
+    if (Title >= 400 && phase_title == 0) phase_title = 1;
   }
   else {
-    background(#FFFFFF);
-    loopCount++;
-    ifTerm();
-    command_enemy();
-    command_myMis();
-    drawEnemyAero(targetX,targetY,30);
-    drawBG();
-    drawTruck(mouseX,height-50);
+    //TODO.clean there
+    mainLoop();
   }
 }

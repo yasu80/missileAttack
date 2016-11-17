@@ -106,14 +106,27 @@ void ifTerm(){
 //Animetor Start
 void sight(){
   fill(#FFFFFF);
-  stroke(5);
   float x = mouseX;
   float y = mouseY;
   float reticle = 40;
+  if (missileFlag == false){
+     stroke(#0DFF47);
+  } else {
+    stroke(#FA0303);
+    text("MSL:"+Float.toString(x)+"."+Float.toString(height - y),x+20,y-20);
+    if ( ((x - reticle) < pointX) && ( pointX <(x + reticle)) && ((y - reticle) < pointY) && ( pointY <(y + reticle)) ){//aiming
+    fill(#000000 );
+    text("VALID AIM",x-20,y-20);  
+    }
+  }
   ellipse(x,y,reticle,reticle);
   rect(x-reticle/4,y-reticle/4,reticle/2,reticle/2);
   line(x-reticle/3,y,x+reticle/3,y);
   line(x,y-reticle/3,x,y+reticle/3);
+  fill(#0DFF47);
+  textSize(16);     
+  text("TGT:"+Float.toString(x)+"."+Float.toString(height - y),x+20,y+20);
+
   //line();
 }
 

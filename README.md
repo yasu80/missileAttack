@@ -3,9 +3,9 @@
 
 
 ![BATTLE](https://github.com/yasu80/missileAttack/blob/master/readme/BATTLE.jpg)
-![scr1](https://github.com/yasu80/missileAttack/blob/master/readme/scr1.jpg)
+![scr1](https://github.com/yasu80/missileAttack/blob/master/readme/scr1.png)
 
-![scr2](https://github.com/yasu80/missileAttack/blob/master/readme/scr2.jpg)
+![scr2](https://github.com/yasu80/missileAttack/blob/master/readme/scr2.png)
 
 ## 概要
 シューティングゲーム. 難易度は低め. 

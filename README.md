@@ -1,8 +1,7 @@
 # missileAttack
 80年代の戦略スクロールシューターに憧れていた夢の跡. ※スパゲティ注意
-
-
 ![BATTLE](https://github.com/yasu80/missileAttack/blob/master/readme/BATTLE.jpg)
+
 ![scr1](https://github.com/yasu80/missileAttack/blob/master/readme/scr1.png)
 
 ![scr2](https://github.com/yasu80/missileAttack/blob/master/readme/scr2.png)

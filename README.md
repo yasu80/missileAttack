@@ -21,3 +21,7 @@ Windows 32bit/64bit Java 実行環境 (こっちは普通のアプリケーシ�
 
 ## 実装どうなってんの
 やめときな！きが ふれるぜ!
+
+## お借りしたもの
+Image Of Hawk-Missile and sunsets are from wikimedia commons, and its copyright reserved by 100yen.
+Top Image, Includes MMD from VPVP (http://www.geocities.jp/higuchuu4/index.htm), 87式自走高射機関砲モデル from スパークリング湯豆腐 (http://seiga.nicovideo.jp/seiga/im5991917), Su-30MKモデル from シナモソ (http://www.nicovideo.jp/watch/sm12671564)
